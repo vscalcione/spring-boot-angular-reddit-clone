@@ -21,7 +21,7 @@ public class MailService {
     public void sendMail(NotificationEmail notificationEmail){
         MimeMessagePreparator mimeMessagePreparator = mimeMessage -> {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-            mimeMessageHelper.setFrom("vincenzo99.scalcione@gmail.com");
+            mimeMessageHelper.setFrom("springboot.reddit@gmail.com");
             mimeMessageHelper.setTo(notificationEmail.getRecipent());
             mimeMessageHelper.setSubject(notificationEmail.getSubject());
             mimeMessageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()));
@@ -29,9 +29,9 @@ public class MailService {
 
         try{
             mailSender.send(mimeMessagePreparator);
-            log.info("Activation email sen!!");
+            log.info("Activation email sent!!");
         }catch(MailException e){
-            throw new SpringRedditException("Exception occurred when sending email to ");
+            throw new SpringRedditException("Exception occurred when sending email to " + notificationEmail.getRecipent());
 
         }
     }
